@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ring_talk/common/commontWidget/customText.dart';
 import 'package:ring_talk/common/components/customSize.dart';
+import 'package:ring_talk/features/homeView/view/messageScreen.dart';
 import '../widget/userCardWidget.dart';
 
 class HomeView extends StatelessWidget {
@@ -179,6 +181,7 @@ class HomeView extends StatelessWidget {
                     email: user['email'] ?? '',
                     time: user['time'] ?? '',
                     imageUrl: user['imageUrl'] ?? '',
+                    onTap: ()=>Get.to(MessageView()),
                   );
                 },
               ),
