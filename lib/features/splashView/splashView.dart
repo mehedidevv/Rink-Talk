@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ring_talk/common/commontWidget/customText.dart';
 import 'package:ring_talk/common/components/customSize.dart';
 import 'package:ring_talk/core/utils/appColors.dart';
 import 'package:ring_talk/core/utils/appImages.dart';
 import '../authenticationView/signInView.dart';
+import '../homeView/view/homeView.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -34,19 +36,30 @@ class _SplashViewState extends State<SplashView>
       CurvedAnimation(parent: _controller, curve: Curves.easeIn),
     );
 
-    /// Scale (Zoom) Animation
+    /// Scale Animation
     _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOutBack),
     );
 
     _controller.forward();
 
-    /// Navigate to SignInView after delay
+    /// 🔥 AUTH CHECK
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const SignInView()),
-      );
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        /// ✅ Already logged in → Home
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) =>  HomeView()),
+        );
+      } else {
+        /// ❌ Not logged in → Sign In
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => SignInView()),
+        );
+      }
     });
   }
 
@@ -95,3 +108,4 @@ class _SplashViewState extends State<SplashView>
     );
   }
 }
+

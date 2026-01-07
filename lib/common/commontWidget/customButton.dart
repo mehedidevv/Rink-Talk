@@ -17,7 +17,7 @@ class CustomButtonWidget extends StatelessWidget {
   final Color? borderColor;
   final IconData? iconData;
   final Color? suffixIconColor;
-  final VoidCallback onTap;
+  final Function()? onTap; // <-- change here
   final double? borderRadius;
   final FontWeight? btnTextFontWeight;
   final double? btnHeight;
@@ -26,7 +26,7 @@ class CustomButtonWidget extends StatelessWidget {
   const CustomButtonWidget({
     super.key,
     required this.btnText,
-    required this.onTap,
+    required this.onTap, // <-- change here too
     this.borderColor,
     this.btnTextColor,
     this.btnTextSize,
@@ -44,7 +44,7 @@ class CustomButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap, // now can accept async function
       child: Container(
         height: btnHeight ?? 38.h ,
         width: btnWidth ?? Get.width,
@@ -71,7 +71,7 @@ class CustomButtonWidget extends StatelessWidget {
                   text: btnText,
                   fontSize: btnTextSize ?? 16.sp,
                   color: btnTextColor ?? Colors.white,
-                  fontWeight: btnTextFontWeight ?? FontWeight.w600, // ✅ use optional
+                  fontWeight: btnTextFontWeight ?? FontWeight.w600,
                 ),
               ],
             ),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ring_talk/common/commontWidget/customText.dart';
 import 'package:ring_talk/common/components/customSize.dart';
 import 'package:ring_talk/features/homeView/view/messageScreen.dart';
+import 'package:ring_talk/features/profileView/view/profileView.dart';
 import '../widget/userCardWidget.dart';
 
 class HomeView extends StatelessWidget {
@@ -154,11 +155,14 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: const Color(0XFF0096FC),
-                    backgroundImage: const NetworkImage(
-                      'https://i.pravatar.cc/150?img=3',
+                  GestureDetector(
+                    onTap: ()=> Get.to(ProfileView()),
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: const Color(0XFF0096FC),
+                      backgroundImage: const NetworkImage(
+                        'https://i.pravatar.cc/150?img=3',
+                      ),
                     ),
                   ),
                 ],

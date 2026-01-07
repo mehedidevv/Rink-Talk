@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
 import 'package:ring_talk/features/authenticationView/signInView.dart';
 
 import '../../common/commontWidget/customButton.dart';
@@ -11,22 +9,25 @@ import '../../common/commontWidget/customTextField.dart';
 import '../../common/components/customSize.dart';
 import '../../core/utils/appColors.dart';
 import '../../core/utils/appImages.dart';
+import 'controller/authController.dart';
 
 class SignUpView extends StatelessWidget {
-  const SignUpView({super.key});
+  SignUpView({super.key});
+
+  final AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFF0096FC),
+      backgroundColor: const Color(0XFF0096FC),
       body: Column(
         children: [
-          /// Top  section
+          /// 🔹 Top Section (UNCHANGED)
           Expanded(
             flex: 4,
             child: Container(
               width: double.infinity,
-              decoration: BoxDecoration(color: Color(0XFF0096FC)),
+              decoration: const BoxDecoration(color: Color(0XFF0096FC)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -35,36 +36,32 @@ class SignUpView extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     backgroundImage: AssetImage(AppImages.logo),
                   ),
-
-
                   heightBox14,
-
                   CustomText(
                     text: 'Ring Talk ',
                     fontSize: 22.sp,
                     fontWeight: FontWeight.w600,
-                    color: Color(0XFFFFFFFF),
-                    fontFamily:'Inter',
+                    color: const Color(0XFFFFFFFF),
+                    fontFamily: 'Inter',
                   ),
-
                   CustomText(
                     text: 'One app. One seamless connection. ',
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
-                    color: Color(0XFFFFFFFF),
-                    fontFamily:'Inter',
+                    color: const Color(0XFFFFFFFF),
+                    fontFamily: 'Inter',
                   ),
                 ],
               ),
             ),
           ),
 
-          /// Bottom white section
+          /// 🔹 Bottom Section
           Expanded(
             flex: 6,
             child: Container(
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -72,7 +69,7 @@ class SignUpView extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(24),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -80,70 +77,79 @@ class SignUpView extends StatelessWidget {
                         text: 'Sign Up',
                         fontSize: 24.sp,
                         fontWeight: FontWeight.w700,
-                        color: Color(0XFF082438),
+                        color: const Color(0XFF082438),
                       ),
 
                       heightBox20,
 
+                      /// Full Name
                       CustomTextField(
                         hintText: 'Full name',
-                        borderColor: Color(0XFFB9C6D6),
+                        borderColor: const Color(0XFFB9C6D6),
                         showObscure: false,
+                        controller: authController.nameController,
                       ),
 
                       heightBox14,
 
+                      /// Email
                       CustomTextField(
                         hintText: 'mehedi@gmail.com',
-                        borderColor: Color(0XFFB9C6D6),
+                        borderColor: const Color(0XFFB9C6D6),
                         showObscure: false,
+                        controller: authController.emailController,
                       ),
+
                       heightBox14,
 
+                      /// Password
                       CustomTextField(
                         hintText: 'Password',
-                        borderColor: Color(0XFFB9C6D6),
+                        borderColor: const Color(0XFFB9C6D6),
                         showObscure: true,
+                        controller: authController.passwordController,
                       ),
-                      
 
                       heightBox20,
 
-                      CustomButtonWidget(
-                          btnText: 'Sign up',
+                      /// Sign Up Button
+                      Obx(
+                            () => CustomButtonWidget(
+                          btnText: authController.isLoading.value
+                              ? 'Please wait...'
+                              : 'Sign up',
                           btnColor: AppColors.mainColor,
-                          onTap: (){
-
+                          onTap: () {
+                            authController.signUp();
                           },
-                          iconWant: false
+                          iconWant: false,
+                        ),
                       ),
 
                       heightBox20,
 
+                      /// Sign In Redirect
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-
                           CustomText(
                             text: 'Already have any account?',
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
-                            color: Color(0XFF5E5E5E),
+                            color: const Color(0XFF5E5E5E),
                           ),
-
                           widthBox5,
                           GestureDetector(
-                            onTap: () => Get.to(SignInView()),
+                            onTap: () => Get.to(() => SignInView()),
                             child: CustomText(
                               text: 'Sign in',
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF0096FC),
+                              color: const Color(0xFF0096FC),
                             ),
                           ),
                         ],
-                      )
-
+                      ),
                     ],
                   ),
                 ),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "408763821474",
+    "project_id": "ring-talk-d19d7",
+    "storage_bucket": "ring-talk-d19d7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408763821474:android:6223e386f0dfbeeee116fb",
+        "android_client_info": {
+          "package_name": "com.example.ring_talk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArGy4Sa00T-tQX8S0vhDZ8M4buGtYG32Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,6 +16,7 @@ class CustomTextField extends StatefulWidget {
   final Color? fillColor;
   final Color? borderColor;
   final int? maxLines;
+  final ValueChanged<String>? onChanged; // <-- Add this
 
   const CustomTextField({
     Key? key,
@@ -30,6 +31,7 @@ class CustomTextField extends StatefulWidget {
     this.borderColor,
     this.maxLines,
     this.readOnly,
+    this.onChanged, // <-- Add this
   }) : super(key: key);
 
   @override
@@ -52,6 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         obscureText: widget.showObscure ? _obscureText : false,
         keyboardType: widget.keyboardType,
         maxLines: widget.maxLines ?? 1,
+        onChanged: widget.onChanged, // <-- Add this
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
@@ -83,9 +86,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
               : null,
           hintText: widget.hintText,
           hintStyle: GoogleFonts.poppins(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              color: Color(0XFF595959)
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w400,
+            color: Color(0XFF595959),
           ),
         ),
       ),
